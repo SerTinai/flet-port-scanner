@@ -18,10 +18,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      # Flet'in ısrarla istediği 3.41.7 sürümünü tam olarak buraya tanımlıyoruz! 🎯
       - name: Setup Flutter SDK
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0'
+          flutter-version: '3.41.7'
           channel: 'stable'
 
       - name: Setup Python
@@ -35,9 +36,10 @@ jobs:
 
       - name: Build APK
         run: |
-          # Temiz ve yalın komut; Flutter zaten hazır olduğu için soru sormadan derleyecek 🚀
+          # Flet'in kurulu Flutter'ı tanıması için çevresel yolu (PATH) fırlatıyoruz 💣
+          export PATH="$FLUTTER_ROOT/bin:$PATH"
           flet build apk
-
+          
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
